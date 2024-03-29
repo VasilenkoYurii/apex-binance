@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { getCandles } from "./helpers/getCandles";
+
+import { SelectSymbol } from "./components/SelectSymbol/SelectSymbol";
+import { SelectInterval } from "./components/SelectInterval/SelectInterval";
+import Charts from "./components/Chart/Chart";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [symbol, setSymbol] = useState("BTCUSDT");
+  const [interval, setInterval] = useState("30m");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const newData = await getCandles(symbol, interval);
+        setData(newData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [symbol, interval]);
+
+  function onSymbolChange(event) {
+    setSymbol(event.target.value);
+  }
+
+  function onIntervalChange(event) {
+    setInterval(event.target.value);
+  }
 
   return (
-    <>
+    <div className="wrapper">
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <SelectSymbol onSymbolChange={onSymbolChange} symbol={symbol} />
+        <SelectInterval
+          onIntervalChange={onIntervalChange}
+          interval={interval}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      {loading ? <p>Loading...</p> : <Charts data={data} />}
+    </div>
+  );
 }
 
-export default App
+export default App;
