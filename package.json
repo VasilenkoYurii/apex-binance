@@ -1,7 +1,8 @@
 {
   "name": "apex-binance",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "main": "https://github.com/VasilenkoYurii/apex-binance",
   "type": "module",
   "scripts": {
     "dev": "vite",
