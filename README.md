@@ -1,8 +1,27 @@
-# React + Vite
+# apex-binance
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Інсталяція
 
-Currently, two official plugins are available:
+Переконайтеся, що у вас встановлено Node.js. Ви можете завантажити його з [Node.js](https://nodejs.org/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Клонуйте цей репозиторій:
+
+```bash
+   clone https://github.com/VasilenkoYurii/apex-binance.git
+```
+
+2. Встановіть залежності:
+
+```bash
+   npm install
+```
+
+3. Запустіть проєкт:
+
+```bash
+   npm run dev
+```
+
+## Превью
+
+![Головний екран](./public/Screenshot.jpg)
